@@ -1,8 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 🙇 안녕하세요 FE개발자 노승주입니다 🙇
 
-## FE개발자 노승주입니다
-
-먼저 아래의 명령어를 차례로 실행해 주세요
+프로젝트를 받으셨다면 아래의 명령어를 차례로 실행해 주세요
 
 ```bash
 # 필요 module 다운로드
@@ -14,6 +12,15 @@ npm run dev
 
 [로컬버전](http://localhost:3000) 또는 [배포버전](https://seungjoonoh.com)을 확인해주세요
 
+## 👍 추천 순서
+
+### ❗️모든 데이터는 Mock 데이터입니다❗️
+
+1. 로또 - 로또에 진심입니다. 로또를 분석하고 매주 구매하고 있습니다. 로또 버튼을 클릭해주세요
+2. 지도 - 약 2년간 지도를 다뤘습니다. 그동안 지도로 해왔던 작업을 담았습니다
+3. 주식 - 주식에 진심입니다. 제가 보유하고 있는 주식을 관리하고 있습니다.
+4. DEX - 탈중앙화 거래소입니다.
+
 ##
 
-❗️모든 데이터는 Mock 데이터입니다.
+## 📜 TL;DR
