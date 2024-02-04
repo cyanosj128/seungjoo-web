@@ -34,9 +34,9 @@ export class Stock {
       ticker: this.ticker,
       nameKor: this.nameKor,
       amount: Format.bigNumber(this.amount),
-      bid: Format.bigNumber(this.bid),
-      targetAsk: Format.bigNumber(this.targetAsk),
-      dividendSum: Format.bigNumber(bigDividendSum),
+      bid: `$${Format.bigNumber(this.bid)}`,
+      targetAsk: `$${Format.bigNumber(this.targetAsk)}`,
+      dividendSum: `$${Format.bigNumber(bigDividendSum)}`,
       quote: this.getQuoteRow(),
       profit: this.getProfitRow(),
     };
@@ -60,7 +60,7 @@ export class Stock {
 
     return (
       <div>
-        <p style={style}>{Format.bigNumber(this.quote)}</p>
+        <p style={style}>{`$${Format.bigNumber(this.quote)}`}</p>
         <p style={style}>{`(${Format.bigNumber(percentage)}%)`}</p>
       </div>
     );
@@ -75,7 +75,9 @@ export class Stock {
 
     const color = bigProfit.lte(0) ? BLUE : RED;
 
-    return <span style={{ color: color }}>{Format.bigNumber(bigProfit)}</span>;
+    return (
+      <span style={{ color: color }}>{`$${Format.bigNumber(bigProfit)}`}</span>
+    );
   }
 }
 
