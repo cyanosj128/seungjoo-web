@@ -13,6 +13,7 @@ export interface StockTableRow {
   quote: JSX.Element; // 시세
   dividendSum: string;
   profit: JSX.Element;
+  imageUrl: string;
 }
 
 export class Stock {
@@ -24,7 +25,8 @@ export class Stock {
     readonly targetAsk: Big, // 매도가
     readonly amount: Big,
     readonly quote: Big, // 시세
-    readonly dividends: Dividend[]
+    readonly dividends: Dividend[],
+    readonly imageUrl: string
   ) {}
 
   toTableFormat(): StockTableRow {
@@ -39,6 +41,7 @@ export class Stock {
       dividendSum: `$${Format.bigNumber(bigDividendSum)}`,
       quote: this.getQuoteRow(),
       profit: this.getProfitRow(),
+      imageUrl: this.imageUrl,
     };
   }
 

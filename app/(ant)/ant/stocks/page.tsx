@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Table } from 'antd';
+import { Card, Table, Avatar } from 'antd';
 import { AntMock } from '@/mocks/ant';
 import { ColumnType } from 'antd/es/table';
 import { Stock, StockTableRow } from '@/models/Stock';
@@ -12,6 +12,12 @@ const columns: ColumnType<StockTableRow>[] = [
     title: '코드',
     align: 'center',
     render: (_, r) => r.ticker,
+  },
+  {
+    key: 'image',
+    title: '이미지',
+    align: 'center',
+    render: (_, r) => <Avatar src={r.imageUrl} alt={r.ticker} />,
   },
   {
     key: 'nameKor',

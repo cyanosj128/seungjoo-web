@@ -2,41 +2,45 @@ import { Dividend, Stock } from '@/models/Stock';
 import { CommonMock } from './common';
 import Big from 'big.js';
 
-const stockNames = [
-  { name: 'tesla', nameKor: '테슬라' },
-  { name: 'meta', nameKor: '메타' },
-  { name: 'nvdia', nameKor: '엔비디아' },
-  { name: 'apple', nameKor: '애플' },
-  { name: 'microsoft', nameKor: '마이크로소프트' },
-  { name: 'pepsi', nameKor: '펩시' },
-  { name: 'starbucks', nameKor: '스타벅스' },
-  { name: 'amazon', nameKor: '아마존' },
+const sampleStocks = [
+  { name: 'tesla', nameKor: '테슬라', imageUrl: '/stocks/tesla.png' },
+  { name: 'meta', nameKor: '메타', imageUrl: '/stocks/meta.png' },
+  { name: 'nvdia', nameKor: '엔비디아', imageUrl: '/stocks/nvdia.png' },
+  { name: 'apple', nameKor: '애플', imageUrl: '/stocks/apple.png' },
+  {
+    name: 'microsoft',
+    nameKor: '마이크로소프트',
+    imageUrl: '/stocks/microsoft.png',
+  },
+  { name: 'pepsi', nameKor: '펩시', imageUrl: '/stocks/pepsi.png' },
+  { name: 'starbucks', nameKor: '스타벅스', imageUrl: '/stocks/starbucks.png' },
+  { name: 'amazon', nameKor: '아마존', imageUrl: '/stocks/amazon.png' },
 ];
 
 const nowMilliseconds = new Date().getTime();
 
 export const AntMock = {
   generateStocks(): Stock[] {
-    return stockNames.map((stockName) => {
+    return sampleStocks.map((sampleStock) => {
       const dividendsCount = CommonMock.generateNumber(20);
-      const dividends = new Array(dividendsCount)
-        .fill(0)
-        .map(
-          () =>
-            new Dividend(
-              nowMilliseconds - CommonMock.generateNumber(1000000),
-              this.generateStockDollarPrice()
-            )
-        );
+      const dividends = Array.from(
+        { length: dividendsCount },
+        () =>
+          new Dividend(
+            nowMilliseconds - CommonMock.generateNumber(1000000),
+            this.generateStockDollarPrice()
+          )
+      );
       return new Stock(
         this.generateTicker(),
-        stockName.nameKor,
-        stockName.name,
+        sampleStock.nameKor,
+        sampleStock.name,
         this.generateStockDollarPrice(),
         this.generateStockDollarPrice(),
         new Big(CommonMock.generateNumber(624)),
         this.generateStockDollarPrice(),
-        dividends
+        dividends,
+        sampleStock.imageUrl
       );
     });
   },
