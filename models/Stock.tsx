@@ -1,5 +1,6 @@
 import { Format } from '@/utils/format';
 import Big from 'big.js';
+import { Avatar } from 'antd';
 
 const RED = '#d61414';
 const BLUE = '#1435d6';
@@ -13,7 +14,7 @@ export interface StockTableRow {
   quote: JSX.Element; // 시세
   dividendSum: string;
   profit: JSX.Element;
-  imageUrl: string;
+  avatar: JSX.Element;
 }
 
 export class Stock {
@@ -26,7 +27,7 @@ export class Stock {
     readonly amount: Big,
     readonly quote: Big, // 시세
     readonly dividends: Dividend[],
-    readonly imageUrl: string
+    readonly avatar: string
   ) {}
 
   toTableFormat(): StockTableRow {
@@ -41,7 +42,7 @@ export class Stock {
       dividendSum: `$${Format.bigNumber(bigDividendSum)}`,
       quote: this.getQuoteRow(),
       profit: this.getProfitRow(),
-      imageUrl: this.imageUrl,
+      avatar: <Avatar src={this.avatar} />,
     };
   }
 
