@@ -12,27 +12,16 @@ import {
   Space,
   Table,
 } from 'antd';
-import { DefaultOptionType } from 'antd/es/select';
 import { ColumnType } from 'antd/es/table';
-import { AntUserDto, AntUserTableRow } from '@/models/AntUser';
-
-export const antUserGenders = ['all', 'male', 'female'] as const;
-export type AntUserGenderType = (typeof antUserGenders)[number];
-
-export const antUserCountries = ['FR', 'CH', 'US', 'BR'] as const;
-export type AntUserCountryType = (typeof antUserCountries)[number];
-
-// when items are added to antUserCountries,
-// typescript will warn that the added items are not included in antUserCountryInfo
-// it is safe to use antUserCountries below to make SelectOption
-export const antUserCountryInfo: {
-  [code in AntUserCountryType]: DefaultOptionType;
-} = {
-  FR: { label: '프랑스', icon: '🇫🇷' },
-  CH: { label: '스위스', icon: '🇨🇭' },
-  US: { label: '미국', icon: '🇺🇸' },
-  BR: { label: '브라질', icon: '🇧🇷' },
-};
+import {
+  AntUser,
+  AntUserCountryType,
+  AntUserGenderType,
+  AntUserTableRow,
+  antUserCountries,
+  antUserCountryInfo,
+  antUserGenders,
+} from '@/models/AntUser';
 
 interface AntUserFilter {
   limit: number;
@@ -54,16 +43,16 @@ const columns: ColumnType<AntUserTableRow>[] = [
     render: (_, __, i) => i + 1,
   },
   {
-    key: 'gender',
-    title: '성별',
-    align: 'center',
-    render: (_, r) => r.gender,
-  },
-  {
     key: 'name',
     title: '이름',
     align: 'center',
     render: (_, r) => r.name,
+  },
+  {
+    key: 'gender',
+    title: '성별',
+    align: 'center',
+    render: (_, r) => r.gender,
   },
   {
     key: 'country',
@@ -80,7 +69,7 @@ const columns: ColumnType<AntUserTableRow>[] = [
 ];
 
 export default function AntUserPage() {
-  const [users, setUsers] = useState<AntUserDto[]>([]);
+  const [users, setUsers] = useState<AntUser[]>([]);
   const [filters, setFilters] = useState<AntUserFilter>(defaultAntUserFilter);
 
   useEffect(() => {
@@ -149,13 +138,12 @@ export default function AntUserPage() {
       </Card>
       <Table
         columns={columns}
-        dataSource={users.map((user) => ({
-          key: `${user.login.uuid}`,
-          gender: user.gender,
-          name: user.name.first + user.name.last,
-          country: user.location.country,
-          age: user.dob.age,
-        }))}
+        dataSource={users
+          .map((user) => user.toTableFormat())
+          .map((user, index) => ({
+            key: `${user.name}-${index}`,
+            ...user,
+          }))}
       />
     </>
   );
